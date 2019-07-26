@@ -4,11 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
 import java.awt.Toolkit;
 
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,6 +43,7 @@ public class ServerGui extends JFrame {
 	public static ArrayList<Socket> listSocket;
 	static DataInputStream din = null;
 	static DataOutputStream dout = null;
+	static JTextField txtMsg = new JTextField();;
 
 	/**
 	 * Launch the application.
@@ -54,7 +57,7 @@ public class ServerGui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	int i, j, x = 0;
+	int i, j, x, y = 0;
 
 	public ServerGui() {
 		super("SERVER FII CHAT");
@@ -110,23 +113,23 @@ public class ServerGui extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (i % 2 == 0) {
-					button.setIcon(new ImageIcon("../ChatRoom/src/image/night.png"));
+					button.setIcon(new ImageIcon("../JavaChat/src/image/night.png"));
 					i++;
 				} else {
-					button.setIcon(new ImageIcon("../ChatRoom/src/image/sun.png"));
+					button.setIcon(new ImageIcon("../JavaChat/src/image/sun.png"));
 					i++;
 				}
 
 			}
 		});
-		button.setIcon(new ImageIcon("../ChatRoom/src/image/sun.png"));
+		button.setIcon(new ImageIcon("../JavaChat/src/image/sun.png"));
 		button.setBackground(new Color(60, 60, 60));
 		button.setBounds(0, 0, 38, 38);
 		panel.add(button);
 
 		JLabel lblNewLabel = new JLabel("Server FII Chat");
 		lblNewLabel.setFont(new Font("Dyuthi", Font.BOLD, 26));
-		lblNewLabel.setForeground(new Color(60, 60, 60));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBackground(new Color(255, 255, 255));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(39, 12, 191, 26);
@@ -136,7 +139,7 @@ public class ServerGui extends JFrame {
 		btnThoat.setBounds(532, 0, 40, 39);
 		btnThoat.setBorderPainted(false);
 		panel.add(btnThoat);
-		btnThoat.setIcon(new ImageIcon("../ChatRoom/src/image/red-icon-power-off-vector-7129971.png"));
+		btnThoat.setIcon(new ImageIcon("../JavaChat/src/image/red-icon-power-off-vector-7129971.png"));
 		btnThoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int question = JOptionPane.showConfirmDialog(btnThoat,
@@ -171,22 +174,22 @@ public class ServerGui extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		JButton button_4 = new JButton("");
-		button_4.addActionListener(new ActionListener() {
+		JButton btnClock = new JButton("");
+		btnClock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 			}
 		});
-		button_4.setIcon(new ImageIcon("../ChatRoom/src/image/icons8-load-balancer-25.png"));
-		button_4.setBorderPainted(false);
-		button_4.setBounds(0, 116, 40, 40);
-		panel_1.add(button_4);
-		button_4.setBackground(new Color(60, 60, 60));
+		btnClock.setIcon(new ImageIcon("../JavaChat/src/image/icons8-load-balancer-25.png"));
+		btnClock.setBorderPainted(false);
+		btnClock.setBounds(0, 116, 40, 40);
+		panel_1.add(btnClock);
+		btnClock.setBackground(new Color(60, 60, 60));
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
-		// panel_2.setBounds(378, 36, 165, 368);
-		panel_2.setBounds(378, 36, 0, 368);
+		// panel_2.setBounds(378, 36, 165, 329);
+		panel_2.setBounds(378, 36, 0, 329);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -229,6 +232,7 @@ public class ServerGui extends JFrame {
 		// JTextArea terminal = new JTextArea();
 		terminal.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 12));
 		scrStatus.setViewportView(terminal);
+		terminal.setWrapStyleWord(true);
 		terminal.setEditable(false);
 		terminal.setLineWrap(true);
 		terminal.setRows(20);
@@ -257,47 +261,46 @@ public class ServerGui extends JFrame {
 //		listOnline.setBackground(new Color(255, 255, 255));
 		scrConnect.setVisible(false);
 
-		JButton button_6 = new JButton("");
+		JButton btnTerminal = new JButton("");
 		JButton btnList = new JButton("");
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (j % 2 == 0) {
-					scrStatus.setBounds(0, 40, 379, 363);
-					panel_2.setBounds(378, 36, 165, 368);
+					scrStatus.setBounds(0, 40, 379, 323);
+					panel_2.setBounds(378, 36, 165, 329);
 					scrConnect.setVisible(true);
 					txtrListOnline.setVisible(true);
 					lblListOnline.setVisible(true);
-					btnList.setIcon(new ImageIcon("../ChatRoom/src/image/listBlack.png"));
-					btnList.setBackground(new Color(211, 211, 211, 60));
-					button_6.setBackground(new Color(60, 60, 60));
+					btnList.setIcon(new ImageIcon("../JavaChat/src/image/listBlack.png"));
+					btnList.setBackground(new Color(211, 211, 211));
+					btnTerminal.setBackground(new Color(60, 60, 60));
 					j++;
 				} else {
-					scrStatus.setBounds(0, 40, 532, 363);
-					panel_2.setBounds(378, 36, 0, 368);
+					scrStatus.setBounds(0, 40, 532, 323);
+					panel_2.setBounds(378, 36, 0, 329);
 					scrConnect.setVisible(false);
 					txtrListOnline.setVisible(false);
 					lblListOnline.setVisible(false);
-					btnList.setIcon(new ImageIcon("../ChatRoom/src/image/listWhite.png"));
+					btnList.setIcon(new ImageIcon("../JavaChat/src/image/listWhite.png"));
 					btnList.setBackground(new Color(60, 60, 60));
-					button_6.setBackground(new Color(255, 255, 255, 60));
+					btnTerminal.setBackground(new Color(211, 211, 211));
 					j++;
 				}
-
 			}
 		});
 
-		button_6.setBounds(0, 220, 40, 40);
-		panel_1.add(button_6);
-		button_6.setBackground(new Color(60, 60, 60));
+		btnTerminal.setBounds(0, 220, 40, 40);
+		panel_1.add(btnTerminal);
+		btnTerminal.setBackground(new Color(60, 60, 60));
 
 		btnList.setBorderPainted(false);
-		btnList.setIcon(new ImageIcon("../ChatRoom/src/image/listWhite.png"));
+		btnList.setIcon(new ImageIcon("../JavaChat/src/image/listWhite.png"));
 		btnList.setBackground(new Color(60, 60, 60));
 		btnList.setBounds(0, 272, 40, 40);
 		panel_1.add(btnList);
 
 		JButton button_5 = new JButton("");
-		button_5.setIcon(new ImageIcon("../ChatRoom/src/image/icons8-clock-25.png"));
+		button_5.setIcon(new ImageIcon("../JavaChat/src/image/icons8-clock-25.png"));
 		button_5.setBorderPainted(false);
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -320,7 +323,7 @@ public class ServerGui extends JFrame {
 				JOptionPane.showMessageDialog(btnPort, "Server operates at PORT Address: 9999");
 			}
 		});
-		btnPort.setIcon(new ImageIcon("../ChatRoom/src/image/rj45White.png"));
+		btnPort.setIcon(new ImageIcon("../JavaChat/src/image/rj45White.png"));
 		btnPort.setBounds(0, 64, 40, 40);
 		panel_1.add(btnPort);
 		btnPort.setBackground(new Color(60, 60, 60));
@@ -333,35 +336,126 @@ public class ServerGui extends JFrame {
 				JOptionPane.showMessageDialog(btnIP, "Server operates at IP Address: 127.0.0.1");
 			}
 		});
-		btnIP.setIcon(new ImageIcon("../ChatRoom/src/image/server.png"));
+		btnIP.setIcon(new ImageIcon("../JavaChat/src/image/server.png"));
 		btnIP.setBounds(0, 12, 40, 40);
 		panel_1.add(btnIP);
 		btnIP.setBackground(new Color(60, 60, 60));
 
 		// JButton button_6 = new JButton("");
-		button_6.setIcon(new ImageIcon("../ChatRoom/src/image/icons8-run-command-25.png"));
-		button_6.setBorderPainted(false);
+		btnTerminal.setIcon(new ImageIcon("../JavaChat/src/image/icons8-run-command-25.png"));
+		btnTerminal.setBorderPainted(false);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(60, 60, 60));
 		panel_3.setBounds(0, 404, 572, 10);
 		contentPane.add(panel_3);
-		button_6.addActionListener(new ActionListener() {
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new EmptyBorder(0, 0, 0, 0));
+		panel_5.setBackground(new Color(169, 169, 169));
+		panel_5.setBounds(1, 365, 532, 39);
+		contentPane.add(panel_5);
+		panel_5.setLayout(null);
+
+		// txtMsg = new JTextField();
+		txtMsg.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtMsg.setText("Cong hoa xa hoi chu nghia viet nam");
+		txtMsg.setBackground(new Color(169, 169, 169));
+		txtMsg.setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.BLACK));
+		txtMsg.setBounds(46, 12, 431, 22);
+		panel_5.add(txtMsg);
+		txtMsg.setColumns(10);
+
+		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (y % 2 == 0) {
+					panel_5.setVisible(true);
+					y++;
+				} else {
+					panel_5.setVisible(false);
+					y++;
+				}
+			}
+		});
+		button_1.setBounds(0, 329, 41, 40);
+		panel_1.add(button_1);
+		button_1.setForeground(new Color(60, 60, 60));
+		button_1.setBorderPainted(false);
+		button_1.setIcon(new ImageIcon("../JavaChat/src/image/chat.png"));
+		button_1.setBorderPainted(false);
+		button_1.setBackground(new Color(60, 60, 60));
+
+		JButton btnSend = new JButton("");
+		btnSend.setIcon(new ImageIcon("../JavaChat/src/image/send.png"));
+		btnSend.setForeground(new Color(60, 60, 60));
+		btnSend.setBorderPainted(false);
+		btnSend.setBackground(new Color(169, 169, 169));
+		btnSend.setBounds(489, 12, 31, 22);
+		panel_5.add(btnSend);
+
+		btnSend.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (txtMsg.getText().equals("")) {
+					JOptionPane.showMessageDialog(btnSend, "ahihi");
+				} else {
+					String msg = txtMsg.getText();
+					terminal.append("<Me>: " + msg);
+					byte[] msgByte = null;
+					for (Socket item : ServerGui.listSocket) {
+						try {
+							dout = new DataOutputStream(item.getOutputStream());
+							msgByte = msg.getBytes();
+							dout.write(msgByte);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						// String msgName = (msg);
+					}
+					if (msg.equals("exitALL")) {
+						try {
+							dout.close();
+							dout.write(msgByte);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println("Disconnect all client !!!");
+						terminal.append("Disconnect all client !!!");
+					}
+					txtMsg.setText("");
+//					writeServer write = new writeServer(txtMsg.getText());
+//					write.start();
+				}
+			}
+		});
+
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("../JavaChat/src/image/chat.png"));
+		button_3.setForeground(new Color(60, 60, 60));
+		button_3.setBorderPainted(false);
+		button_3.setBackground(new Color(169, 169, 169));
+		button_3.setBounds(5, 0, 41, 40);
+		panel_5.add(button_3);
+
+		btnTerminal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (x % 2 == 0) {
-					button_6.setBackground(new Color(255, 255, 255, 60));
+					btnTerminal.setBackground(new Color(211, 211, 211));
 					scrStatus.setBounds(0, 40, 532, 363);
-					panel_2.setBounds(378, 36, 0, 368);
+					panel_2.setBounds(378, 36, 0, 329);
 					scrConnect.setVisible(false);
 					txtrListOnline.setVisible(false);
 					lblListOnline.setVisible(false);
-					btnList.setIcon(new ImageIcon("../ChatRoom/src/image/listWhite.png"));
+					btnList.setIcon(new ImageIcon("../JavaChat/src/image/listWhite.png"));
 					btnList.setBackground(new Color(60, 60, 60));
 					terminal.setText("");
 					terminal.append("[!] Terminal is active !!!\n");
 					x++;
 				} else {
-					button_6.setBackground(new Color(60, 60, 60));
+					btnTerminal.setBackground(new Color(60, 60, 60));
 					x++;
 				}
 			}
@@ -513,20 +607,6 @@ class writeServer extends Thread {
 		while (true) {
 			try {
 				String msg = scan.nextLine();
-//				if (msg.equals("exit")) {
-//					for (Socket item : Server.listSocket) {
-//						Server.listSocket.remove(item);
-//						dout = new DataOutputStream(item.getOutputStream());
-//						din = new DataInputStream(item.getInputStream());
-//						String msgName = ("[#] Đã ngắt kết nối với Server");
-//						byte[] msgByte = msgName.getBytes();
-//						dout.write(msgByte);
-//						din.close();
-//						item.close();
-//					}
-//					System.out.println("[#] Ngắt kết nối với tất cả các client");
-//					continue;
-//				}
 				byte[] msgByte = null;
 				for (Socket item : ServerGui.listSocket) {
 					dout = new DataOutputStream(item.getOutputStream());

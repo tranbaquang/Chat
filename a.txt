@@ -1,0 +1,31 @@
+JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new EmptyBorder(0, 0, 0, 0));
+		panel_5.setBackground(new Color(169, 169, 169));
+		panel_5.setBounds(1, 365, 532, 39);
+		contentPane.add(panel_5);
+		panel_5.setLayout(null);
+
+		txtCongHoaXa = new JTextField();
+		txtCongHoaXa.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtCongHoaXa.setText("Cong hoa xa hoi chu nghia viet nam");
+		txtCongHoaXa.setBackground(new Color(169, 169, 169));
+		txtCongHoaXa.setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.BLACK));
+		txtCongHoaXa.setBounds(70, 12, 407, 22);
+		panel_5.add(txtCongHoaXa);
+		txtCongHoaXa.setColumns(10);
+
+		JButton btnSend = new JButton("");
+		btnSend.setIcon(new ImageIcon("/home/iot/eclipse-workspac/JavaChat/src/image/send.png"));
+		btnSend.setForeground(new Color(60, 60, 60));
+		btnSend.setBorderPainted(false);
+		btnSend.setBackground(new Color(169, 169, 169));
+		btnSend.setBounds(489, 12, 31, 22);
+		panel_5.add(btnSend);
+
+		JButton btnChat2 = new JButton("");
+		btnChat2.setIcon(new ImageIcon("/home/iot/eclipse-workspac/JavaChat/src/image/chat.png"));
+		btnChat2.setForeground(new Color(60, 60, 60));
+		btnChat2.setBorderPainted(false);
+		btnChat2.setBackground(new Color(169, 169, 169));
+		btnChat2.setBounds(17, 0, 41, 40);
+		panel_5.add(btnChat2);
