@@ -62,19 +62,27 @@ public class ServerGui extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(""));
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-//				try {
-////					din.close();
-////					dout.close();
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-
-				System.exit(0);
+				try {
+					String msg = "exitALL";
+					String msg2 = "      < Server Disconnect !!! >";
+					for (Socket item2 : ServerGui.listSocket) {
+						dout = new DataOutputStream(item2.getOutputStream());
+						// String msgName = (msg);
+						byte[] msgByte = msg.getBytes();
+						byte[] msgByte2 = msg2.getBytes();
+						dout.write(msgByte);
+						dout.write(msgByte2);
+						dout.close();
+					}
+					System.exit(0);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
-		// setSize(572, 439);
+		setSize(572, 439);
 		Gui();
 		setVisible(true);
 
@@ -84,7 +92,7 @@ public class ServerGui extends JFrame {
 		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setBounds(100, 100, 694, 632);
+		setBounds(100, 100, 572, 439);
 		// setBounds(100, 100, 572, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -135,7 +143,23 @@ public class ServerGui extends JFrame {
 						"This will make your Clients unable to connect\nAre you sure to exit ?", "Exit",
 						JOptionPane.YES_NO_OPTION);
 				if (question == JOptionPane.YES_OPTION) {
-					System.exit(0);
+					try {
+						String msg = "exitALL";
+						String msg2 = "      < Server Disconnect !!! >";
+						for (Socket item : listSocket) {
+							dout = new DataOutputStream(item.getOutputStream());
+							// String msgName = (msg);
+							byte[] msgByte = msg.getBytes();
+							byte[] msgByte2 = msg2.getBytes();
+							dout.write(msgByte2);
+							dout.write(msgByte);
+							dout.close();
+						}
+						System.exit(0);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -358,14 +382,16 @@ public class ServerGui extends JFrame {
 			// nào kết nối ...");
 			terminal.append("[#] The Server is running !\nWaiting for the Client to connect ...\n");
 			System.out.println("[#] Server đã hoạt động mượt mà ^^\nNgồi hóng coi có đứa nào kết nối ...");
+			writeServer write = new writeServer();
+			write.start();
 			while (true) {
 				Socket client = server.accept();
 				// System.out.println("[#] Có 1 đối tượng giống như con người kết nối");
 				ServerGui.listSocket.add(client);
 				ReadServer read = new ReadServer(client);
 				read.start();
-
 			}
+
 		} catch (IOException e) {
 			terminal.append("[#] The Server cann't running !\n");
 			e.printStackTrace();
@@ -472,6 +498,50 @@ class ReadServer extends Thread {
 				server.close();
 			} catch (IOException ex) {
 				System.err.println(" ");
+			}
+		}
+	}
+}
+
+class writeServer extends Thread {
+
+	@Override
+	public void run() {
+		DataOutputStream dout = null;
+		DataInputStream din = null;
+		Scanner scan = new Scanner(System.in);
+		while (true) {
+			try {
+				String msg = scan.nextLine();
+//				if (msg.equals("exit")) {
+//					for (Socket item : Server.listSocket) {
+//						Server.listSocket.remove(item);
+//						dout = new DataOutputStream(item.getOutputStream());
+//						din = new DataInputStream(item.getInputStream());
+//						String msgName = ("[#] Đã ngắt kết nối với Server");
+//						byte[] msgByte = msgName.getBytes();
+//						dout.write(msgByte);
+//						din.close();
+//						item.close();
+//					}
+//					System.out.println("[#] Ngắt kết nối với tất cả các client");
+//					continue;
+//				}
+				byte[] msgByte = null;
+				for (Socket item : ServerGui.listSocket) {
+					dout = new DataOutputStream(item.getOutputStream());
+					// String msgName = (msg);
+					msgByte = msg.getBytes();
+					dout.write(msgByte);
+				}
+				if (msg.equals("exitALL")) {
+					dout.close();
+					System.out.println("Disconnect all client !!!");
+					dout.write(msgByte);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
